@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>BLUCID | Official Store</title>
+    <style>
+        :root {
+            --text: #0f172a;
+            /* ❄️ 얼음과 빙하 중심의 컬러셋 */
+            --ice-glacier: #f0f9ff;   /* 아주 연한 빙하색 */
+            --clear-sky: #e0f2fe;     /* 맑은 하늘색 */
+            --deep-freeze: #bae6fd;   /* 차가운 냉기가 느껴지는 블루 */
+            --silver-stroke: #94a3b8; /* 실버 테두리 */
+            --accent-blue: #0ea5e9;   /* 포인트가 되는 시원한 블루 */
+            --glass: rgba(255, 255, 255, 0.25);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif; }
+        body { background-color: #ffffff; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
+
+        /* ✨ 얼음 질감의 차가운 배경 애니메이션 */
+        .bg-mesh {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
+            background: 
+                radial-gradient(at 0% 0%, var(--ice-glacier) 0, transparent 55%),
+                radial-gradient(at 100% 0%, var(--clear-sky) 0, transparent 50%),
+                radial-gradient(at 50% 50%, var(--deep-freeze) 0, transparent 65%),
+                radial-gradient(at 100% 100%, #ffffff 0, transparent 50%);
+            background-size: 180% 180%; 
+            animation: iceFlow 20s ease-in-out infinite alternate;
+        }
+        @keyframes iceFlow { 
+            0% { background-position: 0% 0%; } 
+            100% { background-position: 100% 100%; } 
+        }
+
+        /* 네비게이션 */
+        nav {
+            position: fixed; top: 0; width: 100%; padding: 30px 8%;
+            display: flex; justify-content: space-between; align-items: center;
+            z-index: 1000; backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255, 255, 255, 0.15);
+        }
+
+        /* 로고: 실버 볼드 아웃라인 */
+        .logo { 
+            font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; text-decoration: none; 
+            color: #ffffff;
+            -webkit-text-stroke: 1px var(--silver-stroke);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.5);
+        }
+
+        section { min-height: 100vh; padding: 120px 8% 60px; display: flex; flex-direction: column; justify-content: center; }
+
+        /* 히어로 타이틀: 실버 하이라이트 + 볼드 아웃라인 */
+        .hero { align-items: center; text-align: center; }
+        .hero h1 {
+            font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -6px;
+            background: linear-gradient(
+                to right, 
+                #cbd5e1 20%, 
+                #ffffff 45%, 
+                #ffffff 55%, 
+                #cbd5e1 80%
+            );
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            -webkit-text-stroke: 1.5px rgba(148, 163, 184, 0.5);
+            filter: drop-shadow(0 0 20px rgba(255,255,255,0.4));
+            animation: shine 5s linear infinite;
+        }
+        @keyframes shine { to { background-position: 200% center; } }
+
+        .hero p { margin-top: 40px; font-style: italic; letter-spacing: 15px; opacity: 0.5; font-size: 0.85rem; font-weight: 700; color: #64748b; }
+
+        /* 컬렉션 그리드 */
+        .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 80px; }
+        .item-card {
+            background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 40px;
+            padding: 50px; height: 720px; display: flex; flex-direction: column; justify-content: flex-end;
+            transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden;
+            background-size: cover; background-position: center;
+        }
+        .item-card:hover { transform: translateY(-15px); border-color: #ffffff; box-shadow: 0 20px 50px rgba(14, 165, 233, 0.1); }
+        .item-card span { font-size: 0.75rem; font-weight: 800; letter-spacing: 4px; color: var(--accent-blue); }
+        .item-card h2 { font-size: 2.4rem; font-weight: 700; margin-top: 10px; line-height: 1.1; letter-spacing: -1px; color: var(--text); }
+
+        /* 룩북 프리뷰 */
+        .lookbook-preview { width: 100%; height: 80vh; border-radius: 60px; margin: 150px 0; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.3); }
+        .lookbook-preview img { width: 100%; height: 100%; object-fit: cover; transition: 2.5s; filter: brightness(0.9) contrast(1.1); }
+        .lookbook-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; color: white; }
+        .btn-outline { 
+            display: inline-block; padding: 20px 60px; border: 1.5px solid rgba(255,255,255,0.9); 
+            color: white; text-decoration: none; margin-top: 20px; font-weight: 800; letter-spacing: 4px; 
+            transition: 0.4s; backdrop-filter: blur(12px); border-radius: 100px;
+        }
+        .btn-outline:hover { background: white; color: var(--text); transform: scale(1.05); }
+
+        /* 정보 섹션 */
+        .info-section h3 { font-size: clamp(2.5rem, 6vw, 4.2rem); margin-bottom: 35px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+        .info-section p { font-size: 1.3rem; color: #475569; margin-bottom: 80px; line-height: 1.8; max-width: 850px; }
+
+        .nav-links a { text-decoration: none; color: var(--text); margin-left: 35px; font-size: 0.85rem; font-weight: 700; opacity: 0.6; transition: 0.3s; }
+        .nav-links a:hover { opacity: 1; color: var(--accent-blue); }
+
+        footer { padding: 100px 8% 60px; display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.85rem; opacity: 0.6; }
+
+        .reveal { opacity: 0; transform: translateY(50px); transition: 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
+        .reveal.active { opacity: 1; transform: translateY(0); }
+    </style>
+</head>
+<body>
+    <div class="bg-mesh"></div>
+    
+    <nav>
+        <a href="index.html" class="logo">BLUCID</a>
+        <div class="nav-links">
+            <a href="#collection">COLLECTION</a>
+            <a href="lookbook.html">LOOKBOOK</a>
+            <a href="history.html">HISTORY</a>
+        </div>
+    </nav>
+
+    <section class="hero">
+        <h1 class="reveal">BLUCID</h1>
+        <p class="reveal">A STATE OF LUCIDITY</p>
+    </section>
+
+    <section id="collection">
+        <div class="grid-container">
+            <div class="item-card reveal" style="background-image: url('fashion1.jpg');">
+                <span>01 NEW GLACIER</span>
+                <h2>Ethereal<br>Cloud-Knit</h2>
+            </div>
+            <div class="item-card reveal" style="margin-top: 140px; background-image: url('fashion2.jpg');">
+                <span>02 ARCTIC LAYER</span>
+                <h2>Lucid<br>Layering</h2>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="lookbook-preview reveal">
+            <img src="wide_image.jpg" alt="Lookbook Preview">
+            <div class="lookbook-label">
+                <h2 style="font-size: 3.5rem; font-weight: 900; letter-spacing: -2px;">2026 LOOKBOOK</h2>
+                <a href="lookbook.html" class="btn-outline">ENTER NOW</a>
+            </div>
+        </div>
+    </section>
+
+    <section id="about-preview" class="info-section">
+        <div class="reveal">
+            <h3>Ice Identity,<br>Digital Organic.</h3>
+            <p>얼음의 명료함과 실버의 서늘한 아웃라인 사이에서 BLUCID의 정체성은 완성됩니다. 우리는 차가운 광택과 정제된 블루 톤의 조화를 통해 가장 맑은 상태의 미래를 제안합니다.</p>
+            <a href="about.html" style="color: var(--text); font-weight: 800; text-decoration: none; border-bottom: 2.5px solid var(--text); padding-bottom: 5px; font-size: 0.95rem;">OUR STORY</a>
+        </div>
+    </section>
+
+    <footer>
+        <div>© 2026 BLUCID STUDIO INC.</div>
+        <div>INSTAGRAM / SHOWROOM / CONTACT</div>
+    </footer>
+
+    <script>
+        const reveal = () => {
+            const reveals = document.querySelectorAll('.reveal');
+            reveals.forEach(el => {
+                const windowHeight = window.innerHeight;
+                const elementTop = el.getBoundingClientRect().top;
+                if (elementTop < windowHeight - 120) {
+                    el.classList.add('active');
+                }
+            });
+        };
+        window.addEventListener('scroll', reveal);
+        window.addEventListener('load', reveal);
+    </script>
+</body>
+</html>
