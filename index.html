@@ -6,105 +6,103 @@
     <title>BLUCID | Official Store</title>
     <style>
         :root {
-            --text: #0f172a;
-            /* 더 차가운 톤으로 변경된 컬러셋 */
-            --ice-white: #f8fafc;
-            --glacier-blue: #e2e8f0;    /* 빙하색 */
-            --cold-violet: #dbeafe;     /* 푸른 기가 강한 아주 연한 보라 */
-            --deep-indigo: #94a3b8;     /* 차가운 금속 느낌의 블루그레이 */
-            --accent-blue: #6366f1;     /* 포인트 블루 */
-            
-            --silver-base: #94a3b8;
-            --silver-bright: #ffffff;
-            --glass: rgba(255, 255, 255, 0.2);
+            --text: #0f172a; /* 네비게이션 메뉴 및 기본 텍스트 색상 */
+            --ice-glacier: #f0f9ff;
+            --clear-sky: #e0f2fe;
+            --deep-freeze: #bae6fd;
+            --accent-blue: #0ea5e9;
+            --glass: rgba(255, 255, 255, 0.25);
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Apple SD Gothic Neo', 'Pretendard', sans-serif; }
         body { background-color: #ffffff; color: var(--text); overflow-x: hidden; scroll-behavior: smooth; }
 
-        /* ✨ 더 차갑게 조정된 메쉬 그라데이션 (붉은 기 제거) */
+        /* 빙하 느낌 배경 애니메이션 */
         .bg-mesh {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%; z-index: -1;
             background: 
-                radial-gradient(at 0% 0%, #f1f5f9 0, transparent 50%),   /* Slate 100 */
-                radial-gradient(at 100% 0%, #dbeafe 0, transparent 50%),  /* Blue 100 */
-                radial-gradient(at 50% 50%, #e0e7ff 0, transparent 60%),  /* Indigo 100 */
-                radial-gradient(at 80% 80%, #f8fafc 0, transparent 50%);
-            background-size: 200% 200%; 
-            animation: meshFlow 18s ease-in-out infinite alternate;
+                radial-gradient(at 0% 0%, var(--ice-glacier) 0, transparent 55%),
+                radial-gradient(at 100% 0%, var(--clear-sky) 0, transparent 50%),
+                radial-gradient(at 50% 50%, var(--deep-freeze) 0, transparent 65%);
+            background-size: 180% 180%; 
+            animation: iceFlow 20s ease-in-out infinite alternate;
         }
-        @keyframes meshFlow { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
+        @keyframes iceFlow { 0% { background-position: 0% 0%; } 100% { background-position: 100% 100%; } }
 
         /* 네비게이션 */
         nav {
             position: fixed; top: 0; width: 100%; padding: 30px 8%;
             display: flex; justify-content: space-between; align-items: center;
-            z-index: 1000; backdrop-filter: blur(20px); border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            z-index: 1000; backdrop-filter: blur(25px); border-bottom: 1px solid rgba(255, 255, 255, 0.2);
         }
 
+        /* ✨ 로고 수정: 우측 메뉴(LOOKBOOK 등)와 동일한 색상 및 심플 볼드 스타일 */
         .logo { 
-            font-size: 1.6rem; font-weight: 900; letter-spacing: 4px; text-decoration: none; 
-            color: #ffffff;
-            text-shadow: 0 0 1px rgba(255,255,255,0.8);
-            -webkit-text-stroke: 0.8px var(--silver-base);
+            font-size: 1.2rem; /* 메뉴와 균형을 맞춘 크기 */
+            font-weight: 800; /* 강조된 볼드체 */
+            letter-spacing: 3px; 
+            text-decoration: none; 
+            color: var(--text); /* 우측 메뉴와 동일한 Deep Navy */
+            text-transform: uppercase;
+            transition: 0.3s;
         }
+        .logo:hover { opacity: 0.5; }
+
+        .nav-links a { 
+            text-decoration: none; 
+            color: var(--text); 
+            margin-left: 35px; 
+            font-size: 0.85rem; 
+            font-weight: 700; 
+            opacity: 0.7; /* 기본 투명도 */
+            transition: 0.3s; 
+        }
+        .nav-links a:hover { opacity: 1; }
 
         section { min-height: 100vh; padding: 120px 8% 60px; display: flex; flex-direction: column; justify-content: center; }
 
-        /* 히어로 타이틀: 차가운 실버 하이라이트 */
+        /* 메인 히어로 타이틀 */
         .hero { align-items: center; text-align: center; }
         .hero h1 {
             font-size: clamp(4rem, 15vw, 10rem); font-weight: 900; line-height: 0.8; letter-spacing: -6px;
-            background: linear-gradient(
-                to right, 
-                #64748b 20%, 
-                #ffffff 40%, 
-                #ffffff 60%, 
-                #64748b 80%
-            );
+            background: linear-gradient(to right, #cbd5e1 20%, #ffffff 45%, #ffffff 55%, #cbd5e1 80%);
             background-size: 200% auto;
             -webkit-background-clip: text;
             -webkit-text-fill-color: transparent;
-            filter: drop-shadow(0px 4px 10px rgba(15, 23, 42, 0.1));
-            -webkit-text-stroke: 1.2px rgba(148, 163, 184, 0.4);
-            animation: shine 6s linear infinite;
+            -webkit-text-stroke: 1.5px rgba(148, 163, 184, 0.5);
+            animation: shine 5s linear infinite;
         }
         @keyframes shine { to { background-position: 200% center; } }
-
-        .hero p { margin-top: 40px; font-style: italic; letter-spacing: 15px; opacity: 0.4; font-size: 0.85rem; font-weight: 600; color: #475569; }
+        .hero p { margin-top: 40px; font-style: italic; letter-spacing: 15px; opacity: 0.5; font-size: 0.85rem; font-weight: 700; color: #475569; }
 
         /* 컬렉션 그리드 */
         .grid-container { display: grid; grid-template-columns: repeat(2, 1fr); gap: 30px; margin-top: 80px; }
         .item-card {
-            background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.3); border-radius: 40px;
-            padding: 50px; height: 700px; display: flex; flex-direction: column; justify-content: flex-end;
+            background: var(--glass); border: 1px solid rgba(255, 255, 255, 0.4); border-radius: 40px;
+            padding: 50px; height: 720px; display: flex; flex-direction: column; justify-content: flex-end;
             transition: 0.8s cubic-bezier(0.16, 1, 0.3, 1); position: relative; overflow: hidden;
             background-size: cover; background-position: center;
         }
-        .item-card:hover { transform: translateY(-15px); border-color: rgba(255,255,255,0.8); }
+        .item-card:hover { transform: translateY(-15px); border-color: #ffffff; }
         .item-card span { font-size: 0.75rem; font-weight: 800; letter-spacing: 4px; color: var(--accent-blue); }
-        .item-card h2 { font-size: 2.4rem; font-weight: 700; margin-top: 10px; line-height: 1.1; letter-spacing: -1px; }
+        .item-card h2 { font-size: 2.4rem; font-weight: 700; margin-top: 10px; line-height: 1.1; }
 
-        /* 룩북 프리뷰: 채도를 낮춘 차가운 톤 */
-        .lookbook-preview { width: 100%; height: 80vh; border-radius: 60px; margin: 150px 0; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.2); }
-        .lookbook-preview img { width: 100%; height: 100%; object-fit: cover; transition: 2.5s; filter: grayscale(0.2) brightness(0.9); }
-        .lookbook-preview:hover img { transform: scale(1.03); filter: grayscale(0) brightness(1); }
+        /* 룩북 프리뷰 */
+        .lookbook-preview { width: 100%; height: 80vh; border-radius: 60px; margin: 150px 0; overflow: hidden; position: relative; border: 1px solid rgba(255,255,255,0.3); }
+        .lookbook-preview img { width: 100%; height: 100%; object-fit: cover; transition: 2.5s; filter: brightness(0.9); }
         .lookbook-label { position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center; z-index: 2; color: white; }
         .btn-outline { 
-            display: inline-block; padding: 20px 60px; border: 1.5px solid rgba(255,255,255,0.8); 
+            display: inline-block; padding: 20px 60px; border: 1.5px solid rgba(255,255,255,0.9); 
             color: white; text-decoration: none; margin-top: 20px; font-weight: 800; letter-spacing: 4px; 
-            transition: 0.4s; backdrop-filter: blur(10px); border-radius: 100px;
+            transition: 0.4s; backdrop-filter: blur(12px); border-radius: 100px;
         }
         .btn-outline:hover { background: white; color: var(--text); }
 
         /* 정보 섹션 */
-        .info-section h3 { font-size: clamp(2.5rem, 6vw, 4.2rem); margin-bottom: 35px; font-weight: 800; line-height: 1.1; letter-spacing: -2px; }
+        .info-section h3 { font-size: clamp(2.5rem, 6vw, 4.2rem); margin-bottom: 35px; font-weight: 800; line-height: 1.1; }
         .info-section p { font-size: 1.3rem; color: #475569; margin-bottom: 80px; line-height: 1.8; max-width: 850px; }
 
-        .nav-links a { text-decoration: none; color: var(--text); margin-left: 35px; font-size: 0.85rem; font-weight: 700; opacity: 0.5; transition: 0.3s; }
-        .nav-links a:hover { opacity: 1; color: var(--accent-blue); }
-
-        footer { padding: 100px 8% 60px; display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.85rem; opacity: 0.5; }
+        footer { padding: 100px 8% 60px; display: flex; justify-content: space-between; border-top: 1px solid rgba(0,0,0,0.05); font-size: 0.85rem; opacity: 0.6; }
 
         .reveal { opacity: 0; transform: translateY(50px); transition: 1.5s cubic-bezier(0.16, 1, 0.3, 1); }
         .reveal.active { opacity: 1; transform: translateY(0); }
@@ -130,30 +128,20 @@
     <section id="collection">
         <div class="grid-container">
             <div class="item-card reveal" style="background-image: url('fashion1.jpg');">
-                <span>01 NEW COLD-CUT</span>
+                <span>01 NEW GLACIER</span>
                 <h2>Ethereal<br>Cloud-Knit</h2>
             </div>
             <div class="item-card reveal" style="margin-top: 140px; background-image: url('fashion2.jpg');">
-                <span>02 ICY LAYER</span>
+                <span>02 ARCTIC LAYER</span>
                 <h2>Lucid<br>Layering</h2>
-            </div>
-        </div>
-    </section>
-
-    <section>
-        <div class="lookbook-preview reveal">
-            <img src="wide_image.jpg" alt="Lookbook Preview">
-            <div class="lookbook-label">
-                <h2 style="font-size: 3.5rem; font-weight: 900; letter-spacing: -2px;">2026 LOOKBOOK</h2>
-                <a href="lookbook.html" class="btn-outline">ENTER NOW</a>
             </div>
         </div>
     </section>
 
     <section id="about-preview" class="info-section">
         <div class="reveal">
-            <h3>Cold Identity,<br>Digital Organic.</h3>
-            <p>서늘한 실버 아웃라인과 투명한 질감 사이에서 BLUCID의 정체성은 완성됩니다. 우리는 차가운 금속성 광택과 부드러운 유기적 선의 조화를 통해 정제된 미래를 제안합니다.</p>
+            <h3>Pure Identity,<br>Digital Organic.</h3>
+            <p>우리는 얼음의 투명함과 정제된 블루의 차가움 속에서 가장 선명한 자아를 제안합니다. BLUCID의 컬렉션은 불필요한 장식을 배제하고, 공기처럼 가볍온 실루엣과 차가운 빛의 질감을 담아냅니다.</p>
             <a href="about.html" style="color: var(--text); font-weight: 800; text-decoration: none; border-bottom: 2.5px solid var(--text); padding-bottom: 5px; font-size: 0.95rem;">OUR STORY</a>
         </div>
     </section>
@@ -169,9 +157,7 @@
             reveals.forEach(el => {
                 const windowHeight = window.innerHeight;
                 const elementTop = el.getBoundingClientRect().top;
-                if (elementTop < windowHeight - 120) {
-                    el.classList.add('active');
-                }
+                if (elementTop < windowHeight - 120) el.classList.add('active');
             });
         };
         window.addEventListener('scroll', reveal);
